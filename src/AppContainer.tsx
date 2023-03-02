@@ -1,7 +1,9 @@
-import { useState } from "react";
+/** @format */
+
+import { useState } from 'react';
 // 상태관리를 위한 객체복사 라이브러리
-import produce from "immer";
-import App from "./App";
+import produce from 'immer';
+import App from './App';
 export type TodoType = {
   uid: string;
   title: string;
@@ -14,36 +16,36 @@ const AppContainer = () => {
   // 상태데이터
   const initData: Array<TodoType> = [
     {
-      uid: "1",
-      title: "할일 1",
-      body: "할일 내용 1",
+      uid: '1',
+      title: '할일 1',
+      body: '할일 내용 1',
       done: false,
-      sticker: "1",
-      date: "2023-02-27",
+      sticker: '1',
+      date: '2023-02-27',
     },
     {
-      uid: "2",
-      title: "할일 2",
-      body: "할일 내용 2",
+      uid: '2',
+      title: '할일 2',
+      body: '할일 내용 2',
       done: false,
-      sticker: "2",
-      date: "2023-02-27",
+      sticker: '2',
+      date: '2023-02-27',
     },
     {
-      uid: "3",
-      title: "할일 3",
-      body: "할일 내용 3",
+      uid: '3',
+      title: '할일 3',
+      body: '할일 내용 3',
       done: false,
-      sticker: "3",
-      date: "2023-02-27",
+      sticker: '3',
+      date: '2023-02-27',
     },
     {
-      uid: "4",
-      title: "할일 4",
-      body: "할일 내용 4",
+      uid: '4',
+      title: '할일 4',
+      body: '할일 내용 4',
       done: false,
-      sticker: "4",
-      date: "2023-02-27",
+      sticker: '4',
+      date: '2023-02-27',
     },
   ];
 
@@ -83,7 +85,19 @@ const AppContainer = () => {
   // 수정기능
   const updateTodo = (todo: TodoType) => {};
   // 삭제기능
-  const deleteTodo = (todo: TodoType) => {};
+  const deleteTodo = (todo: TodoType) => {
+    let index = todoList.findIndex((item) => todo.uid === item.uid);
+    // state 의 목록을 삭제 후 갱신한다. 불변성 라이브러리 (immer) 활용
+    // let newTodoList = produce( 대상, (draft) => {})
+    let newTodoList = produce(todoList, (draft) => {
+      // index 의 순서로 부터 1개를 제거하고
+      // 나머지 배열을 리턴한다.
+      // 즉, 원본을 복사해서 새로운 배열을 만들고 그 중에 1개를 제거한후
+      // 새로운 배열을 리턴하여 state 를 업데이트 한다.
+      draft.splice(index, 1); //원본을 복사해서 드래프트에 넣어두고 한개만 잘라서 새로운 배열을 만들어
+    });
+    setTodoList(newTodoList);
+  };
   // 정렬기능
   const sortTodo = (sortType: string) => {};
   return (

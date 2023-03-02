@@ -19,7 +19,13 @@ const TodoListItem = (props: propsType) => {
       </Space>
       <Space>
         <Button>Edit</Button>
-        <Button type="primary" danger>
+        <Button
+          type="primary"
+          danger
+          onClick={() => {
+            props.deleteTodo(props.todoItem);
+          }}
+        >
           Delete
         </Button>
       </Space>
@@ -28,3 +34,5 @@ const TodoListItem = (props: propsType) => {
 };
 
 export default TodoListItem;
+
+
