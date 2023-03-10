@@ -1,7 +1,7 @@
 /** @format */
 
 // firebase 관련
-import { fireDB } from './firebase';
+import { fireDB, auth } from './firebase';
 
 import { useEffect, useState } from 'react';
 // 상태관리를 위한 객체복사 라이브러리
@@ -211,8 +211,23 @@ const AppContainer = () => {
   // 전체 목록 삭제
   const clearTodo = () => {
     setTodoList([]);
-    localStorage.removeItem(localStorageName);
+
+    todoList.forEach(async (element) => {
+      // firebase 데이터 1개 삭제
+      const userDoc = doc(fireDB, firebaseStorageName, element.uid);
+      try {
+        const res = await deleteDoc(userDoc);
+        // console.log(res); // res는 undefined
+      } catch (e) {
+        console.log(e);
+      } finally {
+        console.log('end');
+      }
+    });
+
+    // localStorage.removeItem(localStorageName);
   };
+
   // 정렬기능
   const sortTodo = (sortType: string) => {};
   // state 관리기능타입
