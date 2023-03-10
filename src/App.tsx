@@ -8,6 +8,7 @@ import Todo from './pages/Todo';
 import NotFound from './pages/NotFound';
 import TodoEdit from './pages/TodoEdit';
 import Login from './pages/Login';
+import Join from './pages/Join';
 type propsType = {
   states: StatesType;
   callBacks: CallBacksType;
@@ -26,8 +27,9 @@ function App({ states, callBacks }: propsType) {
         {/* 라우팅 영역 */}
         <Routes>
           {/* 로그인 화면 */}
-
           <Route path="/login" element={<Login />} />
+          {/* 회원가입 */}
+          <Route path="/join" element={<Join />} />
           {/* 첫화면 : 입력창, 목록창 */}
           <Route
             path="/"
