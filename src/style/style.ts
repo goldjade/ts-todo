@@ -1,13 +1,10 @@
-/** @format */
-
-import styled from '@emotion/styled';
-//  전체 레이아웃
-
+import styled from "@emotion/styled";
+// 전체 레이아웃
 export const Wrapper = styled.div`
-  position: relative;
-  max-width: 1024px;
+  position: realtive;
+  max-width: 560px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 20px;
   background: #fff;
 `;
 // 공통레이아웃
@@ -19,14 +16,16 @@ export const AppTitle = styled.h1`
   text-align: center;
   padding: 30px 0;
   font-size: 30px;
-  color: teal;
+  color: hotpink;
 `;
+
 // 입력창
 export const TodoInputWrap = styled.div`
   width: 95%;
   margin: 0 auto;
 `;
-//목록창
+
+// 목록창
 export const TodoListWrap = styled.div`
   width: 95%;
   margin: 0 auto;
