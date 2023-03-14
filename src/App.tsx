@@ -101,7 +101,7 @@ function App({ states, callBacks, callBacksFireBase, userLogin }: propsType) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>정말 탈퇴 ㄱㄱ?</p>
+        <p>정말 탈퇴할거임?</p>
       </Modal>
     </BrowserRouter>
   );

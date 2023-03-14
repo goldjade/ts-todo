@@ -5,6 +5,8 @@ import { Button, Checkbox, Form, Input, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { CallBacksFireBaseType } from '../AppContainer';
 
+import type { RootState } from '../store/store';
+
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -34,6 +36,7 @@ type PropsType = {
   callBacksFireBase: CallBacksFireBaseType;
 };
 const Login = ({ userLogin, callBacksFireBase }: PropsType) => {
+
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
@@ -50,6 +53,7 @@ const Login = ({ userLogin, callBacksFireBase }: PropsType) => {
 
   return (
     <div style={{ paddingBottom: 20, minHeight: 500 }}>
+
       <Form
         {...formItemLayout}
         form={form}
