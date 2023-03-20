@@ -1,10 +1,8 @@
-/** @format */
-
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CallBacksType, StatesType } from '../AppContainer';
-import TodoInput from '../components/TodoInput';
-import TodoList from '../components/TodoList';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { CallBacksType, StatesType } from "../AppContainer";
+import TodoInput from "../components/TodoInput";
+import TodoList from "../components/TodoList";
 
 type propsType = {
   states: StatesType;
@@ -20,7 +18,7 @@ const Todo = ({ states, callBacks, userLogin }: propsType) => {
     if (userLogin === false) {
       // 사용자 로그인 정보가 없으면
       // 로그인으로 이동
-      navigator('/login');
+      navigator("/login");
     }
   }, [userLogin]);
 

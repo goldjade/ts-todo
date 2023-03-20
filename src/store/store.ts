@@ -1,29 +1,30 @@
-/** @format */
-
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 // slice 불러들임
-import counterReducer from './couterSlice';
-import userReducer from './userSlice';
+import couterReducer from "./couterSlice";
+import userReducer from "./userSlice";
+import todoReducer from "./todoSlice";
 
 // persist 적용
-import storage from 'redux-persist/lib/storage';
-import { combineReducers } from 'redux';
-import { persistReducer } from 'redux-persist';
+import storage from "redux-persist/lib/storage";
+import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
 const reducers = combineReducers({
-  counter: counterReducer,
+  counter: couterReducer,
   user: userReducer,
+  todo: todoReducer,
 });
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage,
-  whitelist: ['user'],
+  whitelist: ["user"],
 };
 const presistedReducer = persistReducer(persistConfig, reducers);
+
 // store 생성
 export const store = configureStore({
   // reducer: {
   //   // slice 를 작성함
-  //   counter: counterReducer,
+  //   counter: couterReducer,
   //   user: userReducer,
   // },
   reducer: presistedReducer,

@@ -1,8 +1,6 @@
-/** @format */
-
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 // action :  함수로서 store의 state 를 업데이트한다.
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 // 초기 값 타입 정의
 // export interface CounterState  {
@@ -18,7 +16,7 @@ const initialState: CounterState = {
 // 실제 활용할 slice 생성함.
 export const counterSlice = createSlice({
   // slice 의 이름
-  name: 'counter',
+  name: "counter",
   // slice 의 초깃값
   //   initialState: initialState,
   initialState,
@@ -28,7 +26,7 @@ export const counterSlice = createSlice({
     increment: (state) => {
       state.value += 1;
     },
-    // 빼기액션
+    // 빼기 액션
     decrement: (state) => {
       state.value -= 1;
     },
@@ -39,7 +37,8 @@ export const counterSlice = createSlice({
     },
   },
 });
-// action을 내보낸다
-export const { increment, decrement, incrementByAmout } = counterSlice.actions;// actions 는 reducers 에 들어있는 액션들
-// slice 내보내기
-export default counterSlice.reducer
+
+// 액션을 내보낸다.
+export const { increment, decrement, incrementByAmout } = counterSlice.actions;
+// slice의 reducer 를 내보낸다.
+export default counterSlice.reducer;

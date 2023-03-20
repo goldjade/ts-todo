@@ -1,10 +1,8 @@
-/** @format */
+import React, { useEffect, useState } from "react";
 
-import React, { useEffect, useState } from 'react';
-
-import { Button, Checkbox, Form, Input, Space, Modal } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { CallBacksFireBaseType } from '../AppContainer';
+import { Button, Checkbox, Form, Input, Space, Modal } from "antd";
+import { useNavigate } from "react-router-dom";
+import { CallBacksFireBaseType } from "../AppContainer";
 
 const formItemLayout = {
   labelCol: {
@@ -43,7 +41,7 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
 
   const handleOk = () => {
     setIsModalOpen(false);
-    navigate('/login');
+    navigate("/login");
   };
 
   // 웹브라우저 내용 갱신
@@ -52,7 +50,7 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
 
   const onFinish = (values: any) => {
     // firebase 로 회원가입에 필요한 정보 전송
-    console.log('Received values of form: ', values);
+    console.log("Received values of form: ", values);
     callBacksFireBase.fbJoin(values.email, values.password);
     // 회원가입 성공 > login 창으로 이동
     showModal();
@@ -60,7 +58,7 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
 
   useEffect(() => {
     if (userLogin) {
-      navigate('/');
+      navigate("/");
     }
   }, [userLogin]);
 
@@ -72,7 +70,7 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
         name="register"
         onFinish={onFinish}
         initialValues={{}}
-        style={{ maxWidth: '95%' }}
+        style={{ maxWidth: "95%" }}
         scrollToFirstError
       >
         <Form.Item
@@ -80,12 +78,12 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
           label="E-mail"
           rules={[
             {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
+              type: "email",
+              message: "The input is not valid E-mail!",
             },
             {
               required: true,
-              message: 'Please input your E-mail!',
+              message: "Please input your E-mail!",
             },
           ]}
         >
@@ -98,7 +96,7 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: "Please input your password!",
             },
           ]}
           hasFeedback
@@ -109,20 +107,20 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
         <Form.Item
           name="confirm"
           label="Confirm Password"
-          dependencies={['password']}
+          dependencies={["password"]}
           hasFeedback
           rules={[
             {
               required: true,
-              message: 'Please confirm your password!',
+              message: "Please confirm your password!",
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
+                if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error('The two passwords that you entered do not match!')
+                  new Error("The two passwords that you entered do not match!")
                 );
               },
             }),
@@ -139,7 +137,7 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
               validator: (_, value) =>
                 value
                   ? Promise.resolve()
-                  : Promise.reject(new Error('Should accept agreement')),
+                  : Promise.reject(new Error("Should accept agreement")),
             },
           ]}
           {...tailFormItemLayout}
@@ -159,15 +157,16 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
             <Button
               type="primary"
               htmlType="button"
-              onClick={() => navigate('/login')}
+              onClick={() => navigate("/login")}
             >
               Member Login
             </Button>
           </Space>
         </Form.Item>
       </Form>
+
       <Modal
-        title="회원가입 완료!"
+        title="Basic Modal"
         open={isModalOpen}
         onOk={handleOk}
         footer={[
@@ -176,7 +175,7 @@ const Join = ({ callBacksFireBase, userLogin }: PropsType) => {
           </Button>,
         ]}
       >
-        <p>로그인창으로 이동합니다</p>
+        <p>회원가입이 되었습니다. 로그인창으로 이동합니다.</p>
       </Modal>
     </div>
   );

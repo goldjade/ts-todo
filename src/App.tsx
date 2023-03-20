@@ -1,20 +1,19 @@
-/** @format */
+import * as css from "./style/style";
+import { FormOutlined } from "@ant-design/icons";
+import { Button, Modal } from "antd";
 
-import * as css from './style/style';
-import { FormOutlined } from '@ant-design/icons';
-import { Button, Modal } from 'antd';
 import {
   CallBacksFireBaseType,
   CallBacksType,
   StatesType,
-} from './AppContainer';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Todo from './pages/Todo';
-import NotFound from './pages/NotFound';
-import TodoEdit from './pages/TodoEdit';
-import Login from './pages/Login';
-import Join from './pages/Join';
-import { useState } from 'react';
+} from "./AppContainer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Todo from "./pages/Todo";
+import NotFound from "./pages/NotFound";
+import TodoEdit from "./pages/TodoEdit";
+import Login from "./pages/Login";
+import Join from "./pages/Join";
+import { useState } from "react";
 type propsType = {
   states: StatesType;
   callBacks: CallBacksType;
@@ -101,7 +100,7 @@ function App({ states, callBacks, callBacksFireBase, userLogin }: propsType) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>정말 탈퇴할거임?</p>
+        <p>정말 회원 탈퇴 하시겠습니까?</p>
       </Modal>
     </BrowserRouter>
   );

@@ -1,11 +1,9 @@
-/** @format */
-
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 // firestore Import
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore } from "firebase/firestore";
 
-// firebaseAuth
-import { getAuth } from 'firebase/auth';
+// firebase Auth
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -20,6 +18,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 // firestor 내보기
 export const fireDB = getFirestore(app);
-
 // 인증하기
 export const auth = getAuth(app);

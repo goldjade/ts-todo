@@ -1,11 +1,7 @@
-/** @format */
-
-import React, { useEffect } from 'react';
-import { Button, Checkbox, Form, Input, Space } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { CallBacksFireBaseType } from '../AppContainer';
-
-import type { RootState } from '../store/store';
+import React, { useEffect } from "react";
+import { Button, Checkbox, Form, Input, Space } from "antd";
+import { useNavigate } from "react-router-dom";
+import { CallBacksFireBaseType } from "../AppContainer";
 
 const formItemLayout = {
   labelCol: {
@@ -36,31 +32,29 @@ type PropsType = {
   callBacksFireBase: CallBacksFireBaseType;
 };
 const Login = ({ userLogin, callBacksFireBase }: PropsType) => {
-
   const navigate = useNavigate();
   const [form] = Form.useForm();
 
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    // console.log("Success:", values);
     callBacksFireBase.fbLogin(values.email, values.password);
   };
 
   useEffect(() => {
     if (userLogin) {
-      navigate('/');
+      navigate("/");
     }
   }, [userLogin]);
 
   return (
     <div style={{ paddingBottom: 20, minHeight: 500 }}>
-
       <Form
         {...formItemLayout}
         form={form}
         name="register"
         onFinish={onFinish}
         initialValues={{}}
-        style={{ maxWidth: '95%' }}
+        style={{ maxWidth: "95%" }}
         scrollToFirstError
       >
         <Form.Item
@@ -68,12 +62,12 @@ const Login = ({ userLogin, callBacksFireBase }: PropsType) => {
           label="E-mail"
           rules={[
             {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
+              type: "email",
+              message: "The input is not valid E-mail!",
             },
             {
               required: true,
-              message: 'Please input your E-mail!',
+              message: "Please input your E-mail!",
             },
           ]}
         >
@@ -86,7 +80,7 @@ const Login = ({ userLogin, callBacksFireBase }: PropsType) => {
           rules={[
             {
               required: true,
-              message: 'Please input your password!',
+              message: "Please input your password!",
             },
           ]}
           hasFeedback
@@ -105,9 +99,9 @@ const Login = ({ userLogin, callBacksFireBase }: PropsType) => {
             <Button
               type="primary"
               htmlType="button"
-              onClick={() => navigate('/join')}
+              onClick={() => navigate("/join")}
             >
-              Member Joim
+              Member Join
             </Button>
           </Space>
         </Form.Item>
