@@ -1,22 +1,30 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+/** @format */
+
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   deleteUser,
   User,
   UserCredential,
-} from "firebase/auth";
-import { auth } from "../firebase";
+} from 'firebase/auth';
+import { auth } from '../firebase';
 // FB 로그인 관련
 export type FBUser = {
   email: string;
   password: string;
 };
 
-// 파이어베으스  로그인
+// 파이어베이스  로그인
+
+// 액션(fbLoginFB)을 만들어서( Action Creator )
+// { type: 구별할수 있는 문자열, action: {payload:데이터}}
+
+// Reducer 로 전달한다.
+// 이후 회신값으로 store 의 state 를 업데이트한다.
 export const fbLoginFB = createAsyncThunk(
-  "user/login",
+  'user/login',
   async (tempUser: FBUser) => {
     try {
       const userCredential: UserCredential = await signInWithEmailAndPassword(
@@ -32,49 +40,47 @@ export const fbLoginFB = createAsyncThunk(
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log("errorCode : ", errorCode);
-      console.log("errorMessage : ", errorMessage);
+      console.log('errorCode : ', errorCode);
+      console.log('errorMessage : ', errorMessage);
     }
   }
 );
-
+// Action 을 만든다.
+// {type:문자열, action: payload }
 export const fbJoinFB = createAsyncThunk(
-  "user/join",
+  'user/join',
   async (tempUser: FBUser) => {
-    await createUserWithEmailAndPassword(
-      auth,
-      tempUser.email,
-      tempUser.password
-    )
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-
-        fbJoinState();
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("errorCode : ", errorCode);
-        console.log("errorMessage : ", errorMessage);
-      });
+    try {
+      const userCredential: UserCredential =
+        await createUserWithEmailAndPassword(
+          auth,
+          tempUser.email,
+          tempUser.password
+        );
+      const user = userCredential.user;
+      console.log(user);
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('errorCode : ', errorCode);
+      console.log('errorMessage : ', errorMessage);
+    }
   }
 );
-export const fbLogoutFB = createAsyncThunk("user/logout", async () => {
-  await auth.signOut();
-  fbLogoutState();
+// 액션{type, action}을 만들어서 reduer 로 전송한다.
+export const fbLogoutFB = createAsyncThunk('user/logout', async () => {
+  try {
+    await auth.signOut();
+    // fbLogoutState();
+  } catch (error: any) {}
 });
-
-export const fbDeleteUserFB = createAsyncThunk("user/delete", async () => {
-  await deleteUser(auth.currentUser as User)
-    .then(() => {
-      // User deleted.
-      fbDeleteUserState();
-    })
-    .catch((error) => {
-      console.log("회원 탈퇴 실패");
-    });
+// 액션{type (user/delete), action}을 만들어서 reduer 로 전송한다.
+export const fbDeleteUserFB = createAsyncThunk('user/delete', async () => {
+  try {
+    await deleteUser(auth.currentUser as User);
+  } catch (error: any) {
+    console.log('회원탈퇴 실패');
+  }
 });
 
 // 초기 값 타입 정의
@@ -86,11 +92,11 @@ export type LoginState = {
 // store 의 state 의 초기값 셋팅
 const initialState: LoginState = {
   userLogin: false,
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     fbLoginState: (
@@ -103,18 +109,18 @@ export const userSlice = createSlice({
     },
     fbJoinState: (state) => {
       state.userLogin = false;
-      state.email = "";
-      state.password = "";
+      state.email = '';
+      state.password = '';
     },
     fbLogoutState: (state) => {
       state.userLogin = false;
-      state.email = "";
-      state.password = "";
+      state.email = '';
+      state.password = '';
     },
     fbDeleteUserState: (state) => {
       state.userLogin = false;
-      state.email = "";
-      state.password = "";
+      state.email = '';
+      state.password = '';
     },
   },
   extraReducers: (builder) => {
@@ -130,15 +136,27 @@ export const userSlice = createSlice({
       .addCase(fbLoginFB.rejected, (state, action) => {})
       // 회원가입
       .addCase(fbJoinFB.pending, (state, action) => {})
-      .addCase(fbJoinFB.fulfilled, (state, action) => {})
+      .addCase(fbJoinFB.fulfilled, (state, action) => {
+        state.userLogin = false;
+        state.email = '';
+        state.password = '';
+      })
       .addCase(fbJoinFB.rejected, (state, action) => {})
       // 로그아웃
       .addCase(fbLogoutFB.pending, (state, action) => {})
-      .addCase(fbLogoutFB.fulfilled, (state, action) => {})
+      .addCase(fbLogoutFB.fulfilled, (state, action) => {
+        state.userLogin = false;
+        state.email = '';
+        state.password = '';
+      })
       .addCase(fbLogoutFB.rejected, (state, action) => {})
       // 회원탈퇴
       .addCase(fbDeleteUserFB.pending, (state, action) => {})
-      .addCase(fbDeleteUserFB.fulfilled, (state, action) => {})
+      .addCase(fbDeleteUserFB.fulfilled, (state, action) => {
+        state.userLogin = false;
+        state.email = '';
+        state.password = '';
+      })
       .addCase(fbDeleteUserFB.rejected, (state, action) => {});
   },
 });

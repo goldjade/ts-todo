@@ -198,7 +198,7 @@ export const todoSlice = createSlice({
         state.todoList = action.payload as Array<TodoType>;
       })
       .addCase(getTodoFB.rejected, (state, action) => {
-        console.log("getTodoFB.rejected");
+        // console.log("getTodoFB.rejected");
       })
       // 할일 추가
       .addCase(addTodoFB.pending, (state, action) => {})
