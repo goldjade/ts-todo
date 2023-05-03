@@ -5,7 +5,7 @@ import {
   fbLogoutStateSaga,
   fbDeleteUserStateSaga,
 } from "./fbUserSlice";
-import { call, fork, put, takeEvery } from "@redux-saga/core/effects";
+import { call, fork, put, takeEvery } from "@redux-saga/coreya/effects";
 import { auth } from "../firebase";
 import {
   signInWithEmailAndPassword,
